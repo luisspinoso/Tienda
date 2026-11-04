@@ -4,6 +4,7 @@ import (
 	"Tienda/internal/model"
 	"Tienda/internal/service"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -28,8 +29,16 @@ func (h *ProductoHandler) HandleProductos(w http.ResponseWriter, r *http.Request
 			return
 		}
 
+		fmt.Println(productos)
+
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(productos)
+		json.NewEncoder(w).Encode(
+			map[string]string{
+				"correo":     "ana@example.com",
+				"Nombre":     "Ana",
+				"Contraseña": "1234",
+			},
+		)
 
 	case http.MethodPost:
 		var producto model.Producto
